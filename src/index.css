@@ -1,0 +1,141 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'react-toastify/dist/ReactToastify.css';
+
+.Toastify__toast-container {
+  @apply text-sm;
+}
+
+.Toastify__toast {
+  @apply rounded-lg shadow-lg;
+  min-height: auto !important;
+  padding: 12px 16px !important;
+}
+
+.Toastify__toast--success {
+  @apply bg-success text-white;
+}
+
+.Toastify__toast--error {
+  @apply bg-error text-white;
+}
+
+.Toastify__toast--warning {
+  @apply bg-warning text-white;
+}
+
+.Toastify__toast--info {
+  @apply bg-info text-white;
+}
+
+.Toastify__progress-bar--success {
+  @apply bg-green-200;
+}
+
+.Toastify__progress-bar--error {
+  @apply bg-red-200;
+}
+
+.Toastify__progress-bar--warning {
+  @apply bg-yellow-200;
+}
+
+.Toastify__progress-bar--info {
+  @apply bg-blue-200;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Drag and drop styles */
+.task-dragging {
+  @apply opacity-50 transform rotate-2;
+}
+
+.task-drag-over {
+  @apply border-primary bg-primary bg-opacity-5;
+}
+
+/* Animations for task completion */
+@keyframes task-complete {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.task-completing {
+  animation: task-complete 0.3s ease-out;
+}
+
+/* Priority color variables */
+.priority-high {
+  --priority-color: #ef4444;
+}
+
+.priority-medium {
+  --priority-color: #f59e0b;
+}
+
+.priority-low {
+  --priority-color: #3b82f6;
+}
+
+/* Smooth transitions for interactive elements */
+.interactive-element {
+  transition: all 0.2s ease-out;
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px);
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus {
+  @apply ring-2 ring-primary ring-offset-2 outline-none;
+}
+
+/* Custom checkbox styles */
+.custom-checkbox {
+  appearance: none;
+  @apply w-5 h-5 border-2 border-gray-300 rounded-md bg-white cursor-pointer transition-all duration-200;
+}
+
+.custom-checkbox:checked {
+  @apply bg-success border-success;
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox:indeterminate {
+  @apply bg-primary border-primary;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
+}
