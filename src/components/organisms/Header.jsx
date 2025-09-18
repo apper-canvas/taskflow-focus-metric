@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { AuthContext } from "@/contexts/AuthContext";
 import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
 
 const Header = ({ taskStats = {}, className = "" }) => {
   const { total = 0, completed = 0, pending = 0 } = taskStats;
+  const { logout } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
   const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
@@ -19,7 +24,7 @@ const Header = ({ taskStats = {}, className = "" }) => {
             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
               <ApperIcon name="CheckSquare" size={24} className="text-white" />
             </div>
-            <div>
+<div>
               <h1 className="text-3xl font-bold tracking-tight">TaskFlow</h1>
               <p className="text-white/80 text-sm">Stay organized, get things done</p>
             </div>
@@ -45,6 +50,24 @@ const Header = ({ taskStats = {}, className = "" }) => {
           <div className="text-center">
             <div className="text-2xl font-bold">{completionRate}%</div>
             <div className="text-white/80 text-sm">Progress</div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            {user && (
+              <div className="text-right">
+                <div className="text-sm font-medium text-white">{user.firstName} {user.lastName}</div>
+                <div className="text-xs text-white/60">{user.emailAddress}</div>
+              </div>
+            )}
+            <Button
+              onClick={logout}
+              variant="logout"
+              size="sm"
+              className="text-white hover:bg-white/20"
+            >
+              <ApperIcon name="LogOut" size={16} className="mr-2" />
+              Logout
+            </Button>
           </div>
         </div>
       </div>

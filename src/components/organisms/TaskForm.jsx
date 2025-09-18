@@ -13,10 +13,10 @@ const TaskForm = ({
   onCancel,
   isSubmitting = false 
 }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    priority: "medium"
+const [formData, setFormData] = useState({
+    title_c: "",
+    description_c: "",
+    priority_c: "medium"
   });
   
   const [errors, setErrors] = useState({});
@@ -24,9 +24,9 @@ const TaskForm = ({
   useEffect(() => {
     if (initialData) {
       setFormData({
-        title: initialData.title || "",
-        description: initialData.description || "",
-        priority: initialData.priority || "medium"
+        title_c: initialData.title_c || initialData.title || "",
+        description_c: initialData.description_c || initialData.description || "",
+        priority_c: initialData.priority_c || initialData.priority || "medium"
       });
     }
   }, [initialData]);
@@ -123,8 +123,8 @@ const TaskForm = ({
             id="title"
             type="text"
             placeholder="What needs to be done?"
-            value={formData.title}
-            onChange={(e) => handleChange("title", e.target.value)}
+value={formData.title_c}
+            onChange={(e) => handleChange("title_c", e.target.value)}
             error={!!errors.title}
           />
           {errors.title && (
@@ -140,8 +140,8 @@ const TaskForm = ({
             id="description"
             placeholder="Add more details about this task..."
             rows={4}
-            value={formData.description}
-            onChange={(e) => handleChange("description", e.target.value)}
+value={formData.description_c}
+            onChange={(e) => handleChange("description_c", e.target.value)}
           />
         </div>
 
@@ -150,8 +150,8 @@ const TaskForm = ({
             Priority
           </label>
           <PrioritySelector
-            value={formData.priority}
-            onChange={(value) => handleChange("priority", value)}
+value={formData.priority_c}
+            onChange={(value) => handleChange("priority_c", value)}
             error={!!errors.priority}
           />
           {errors.priority && (

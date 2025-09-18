@@ -21,7 +21,7 @@ const TaskCard = ({
   const handleToggleComplete = async () => {
     setIsCompleting(true);
     try {
-      await onToggleComplete(task.Id, !task.completed);
+await onToggleComplete(task.Id, !task.completed_c);
     } finally {
       setIsCompleting(false);
     }
@@ -62,8 +62,8 @@ const TaskCard = ({
       className={cn(
         "bg-surface rounded-xl p-6 shadow-sm border-l-4 border border-gray-100",
         "hover:shadow-md transition-all duration-200",
-        getPriorityColor(task.priority),
-        task.completed && "opacity-75",
+getPriorityColor(task.priority_c),
+        task.completed_c && "opacity-75",
         isDragging && "task-dragging shadow-xl",
         className
       )}
@@ -84,23 +84,23 @@ const TaskCard = ({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between mb-3">
             <h3 className={cn(
-              "text-lg font-semibold leading-tight",
-              task.completed 
+"text-lg font-semibold leading-tight",
+              task.completed_c 
                 ? "text-gray-500 line-through" 
                 : "text-gray-900"
             )}>
-              {task.title}
+              {task.title_c}
             </h3>
             
-            <Badge variant={task.priority} size="sm">
-              {priorityLabels[task.priority]}
+<Badge variant={task.priority_c} size="sm">
+              {priorityLabels[task.priority_c]}
             </Badge>
           </div>
 
-          {task.description && (
+{task.description_c && (
             <p className={cn(
               "text-sm leading-relaxed mb-4",
-              task.completed 
+              task.completed_c 
                 ? "text-gray-400 line-through" 
                 : "text-gray-600"
             )}>
@@ -112,13 +112,13 @@ const TaskCard = ({
             <div className="flex items-center space-x-4 text-xs text-gray-500">
               <span className="flex items-center space-x-1">
                 <ApperIcon name="Calendar" size={14} />
-                <span>Created {formatDate(task.createdAt)}</span>
+<span>Created {formatDate(task.created_at_c)}</span>
               </span>
               
-              {task.completed && task.completedAt && (
+{task.completed_c && task.completed_at_c && (
                 <span className="flex items-center space-x-1 text-success">
                   <ApperIcon name="CheckCircle" size={14} />
-                  <span>Completed {formatDate(task.completedAt)}</span>
+                  <span>Completed {formatDate(task.completed_at_c)}</span>
                 </span>
               )}
             </div>

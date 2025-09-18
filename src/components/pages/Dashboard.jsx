@@ -48,24 +48,24 @@ const Dashboard = () => {
     // Apply search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(task =>
-        task.title.toLowerCase().includes(query) ||
-        task.description.toLowerCase().includes(query)
+filtered = filtered.filter(task =>
+        task.title_c.toLowerCase().includes(query) ||
+        task.description_c.toLowerCase().includes(query)
       );
     }
 
     // Apply status and priority filters
     switch (activeFilter) {
       case "completed":
-        filtered = filtered.filter(task => task.completed);
+filtered = filtered.filter(task => task.completed_c);
         break;
       case "pending":
-        filtered = filtered.filter(task => !task.completed);
+        filtered = filtered.filter(task => !task.completed_c);
         break;
       case "high":
       case "medium":
       case "low":
-        filtered = filtered.filter(task => task.priority === activeFilter);
+        filtered = filtered.filter(task => task.priority_c === activeFilter);
         break;
       default:
         // "all" - no additional filtering
@@ -76,19 +76,19 @@ const Dashboard = () => {
   }, [tasks, searchQuery, activeFilter]);
 
   const getTaskCounts = () => {
-    return {
+return {
       all: tasks.length,
-      pending: tasks.filter(t => !t.completed).length,
-      completed: tasks.filter(t => t.completed).length,
-      high: tasks.filter(t => t.priority === "high").length,
-      medium: tasks.filter(t => t.priority === "medium").length,
-      low: tasks.filter(t => t.priority === "low").length
+      pending: tasks.filter(t => !t.completed_c).length,
+      completed: tasks.filter(t => t.completed_c).length,
+      high: tasks.filter(t => t.priority_c === "high").length,
+      medium: tasks.filter(t => t.priority_c === "medium").length,
+      low: tasks.filter(t => t.priority_c === "low").length
     };
   };
 
-  const getTaskStats = () => {
+const getTaskStats = () => {
     const total = tasks.length;
-    const completed = tasks.filter(t => t.completed).length;
+    const completed = tasks.filter(t => t.completed_c).length;
     const pending = tasks.filter(t => !t.completed).length;
     return { total, completed, pending };
   };
@@ -129,8 +129,8 @@ const Dashboard = () => {
 
   const handleToggleComplete = async (taskId, completed) => {
     try {
-      const updatedTask = await taskService.update(taskId, { completed });
-      setTasks(prev => prev.map(task => 
+const updatedTask = await taskService.update(taskId, { completed_c: completed });
+      setTasks(prev => prev.map(task =>
         task.Id === taskId ? updatedTask : task
       ));
       toast.success(completed ? "Task completed! 🎉" : "Task marked as pending");
@@ -154,11 +154,11 @@ const Dashboard = () => {
   };
 
   const handleDuplicateTask = async (task) => {
-    try {
+try {
       const duplicateData = {
-        title: `Copy of ${task.title}`,
-        description: task.description,
-        priority: task.priority
+        title_c: `Copy of ${task.title_c}`,
+        description_c: task.description_c,
+        priority_c: task.priority_c
       };
       const newTask = await taskService.create(duplicateData);
       setTasks(prev => [...prev, newTask]);
@@ -248,7 +248,7 @@ const Dashboard = () => {
                     <span>New Task</span>
                   </Button>
                   
-                  {tasks.filter(t => !t.completed).length > 0 && (
+{tasks.filter(t => !t.completed_c).length > 0 && (
                     <Button
                       onClick={() => setActiveFilter("pending")}
                       variant="secondary"
@@ -256,7 +256,7 @@ const Dashboard = () => {
                       className="w-full"
                     >
                       <ApperIcon name="Clock" size={18} />
-                      <span>View Pending ({tasks.filter(t => !t.completed).length})</span>
+<span>View Pending ({tasks.filter(t => !t.completed_c).length})</span>
                     </Button>
                   )}
                 </div>
