@@ -398,4 +398,3 @@ class TaskService {
 
 const taskService = new TaskService();
 export default taskService;
-export default new TaskService();
