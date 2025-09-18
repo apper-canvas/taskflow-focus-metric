@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { AuthContext } from "@/contexts/AuthContext";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 
 const Header = ({ taskStats = {}, className = "" }) => {
   const { total = 0, completed = 0, pending = 0 } = taskStats;
-  const { logout } = useContext(AuthContext);
   const { user } = useSelector((state) => state.user);
   const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+  
+  const handleLogout = () => {
+    // TODO: Implement logout functionality with Redux or authentication service
+    console.log("Logout functionality to be implemented");
+  };
 
   return (
     <motion.header
@@ -58,9 +61,9 @@ const Header = ({ taskStats = {}, className = "" }) => {
                 <div className="text-sm font-medium text-white">{user.firstName} {user.lastName}</div>
                 <div className="text-xs text-white/60">{user.emailAddress}</div>
               </div>
-            )}
+)}
             <Button
-              onClick={logout}
+              onClick={handleLogout}
               variant="logout"
               size="sm"
               className="text-white hover:bg-white/20"
